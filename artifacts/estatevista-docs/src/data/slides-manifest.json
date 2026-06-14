@@ -1,0 +1,146 @@
+[
+  {
+    "id": "a1b2c3d4-0001-4e5f-a6b7-c8d9e0f10001",
+    "position": 1,
+    "filepath": "src/pages/slides/Slide01Cover.tsx",
+    "title": "Cover — EstateVista",
+    "description": "Title slide with student and university details",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0002-4e5f-a6b7-c8d9e0f10002",
+    "position": 2,
+    "filepath": "src/pages/slides/Slide02TOC.tsx",
+    "title": "Table of Contents",
+    "description": "Index of all 16 sections in the deck",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0003-4e5f-a6b7-c8d9e0f10003",
+    "position": 3,
+    "filepath": "src/pages/slides/Slide03Overview.tsx",
+    "title": "Project Overview",
+    "description": "What EstateVista is and its key numbers",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0004-4e5f-a6b7-c8d9e0f10004",
+    "position": 4,
+    "filepath": "src/pages/slides/Slide04Objectives.tsx",
+    "title": "Objectives",
+    "description": "Six core project goals",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0005-4e5f-a6b7-c8d9e0f10005",
+    "position": 5,
+    "filepath": "src/pages/slides/Slide05Architecture.tsx",
+    "title": "System Architecture",
+    "description": "SVG architecture diagram: client → proxy → frontend/API → DB + OpenAPI",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0006-4e5f-a6b7-c8d9e0f10006",
+    "position": 6,
+    "filepath": "src/pages/slides/Slide06TechStack.tsx",
+    "title": "Technology Stack",
+    "description": "Frontend, backend, database, API, dev tools, and maps/UX categories",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0007-4e5f-a6b7-c8d9e0f10007",
+    "position": 7,
+    "filepath": "src/pages/slides/Slide07ERDiagram.tsx",
+    "title": "Database ER Diagram",
+    "description": "SVG ER diagram: agents (1) → properties (N) relationship with all columns",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0008-4e5f-a6b7-c8d9e0f10008",
+    "position": 8,
+    "filepath": "src/pages/slides/Slide08UseCaseDiagram.tsx",
+    "title": "Use Case Diagram",
+    "description": "SVG use case diagram: Guest User and Admin actors with system boundary",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0009-4e5f-a6b7-c8d9e0f10009",
+    "position": 9,
+    "filepath": "src/pages/slides/Slide09ActivitySearch.tsx",
+    "title": "Activity Diagram — Property Search",
+    "description": "SVG activity flow: home → search → API query → results/empty state",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0010-4e5f-a6b7-c8d9e0f10010",
+    "position": 10,
+    "filepath": "src/pages/slides/Slide10ActivityReg.tsx",
+    "title": "Activity Diagram — Contact Agent",
+    "description": "Swimlane activity diagram: User / Frontend / Backend API lanes",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0011-4e5f-a6b7-c8d9e0f10011",
+    "position": 11,
+    "filepath": "src/pages/slides/Slide11Modules.tsx",
+    "title": "Module Breakdown",
+    "description": "Six system modules: Home, Properties, Detail, Map, Agents, API",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0012-4e5f-a6b7-c8d9e0f10012",
+    "position": 12,
+    "filepath": "src/pages/slides/Slide12Frontend.tsx",
+    "title": "Frontend Features",
+    "description": "React 18 pages, Framer Motion, React Query hooks, theme system, stats",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0013-4e5f-a6b7-c8d9e0f10013",
+    "position": 13,
+    "filepath": "src/pages/slides/Slide13BackendAPI.tsx",
+    "title": "Backend API",
+    "description": "Six Express endpoints with method badges and descriptions",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0014-4e5f-a6b7-c8d9e0f10014",
+    "position": 14,
+    "filepath": "src/pages/slides/Slide14Listings.tsx",
+    "title": "Property Listings",
+    "description": "Mock property card grid with Ahmedabad listings and INR prices",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0015-4e5f-a6b7-c8d9e0f10015",
+    "position": 15,
+    "filepath": "src/pages/slides/Slide15MapView.tsx",
+    "title": "Map View",
+    "description": "Leaflet map mockup with price pins and feature list",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0016-4e5f-a6b7-c8d9e0f10016",
+    "position": 16,
+    "filepath": "src/pages/slides/Slide16Metrics.tsx",
+    "title": "Key Metrics",
+    "description": "Platform highlights: 40+ properties, 6 agents, 12 neighborhoods, tech stack chips",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0017-4e5f-a6b7-c8d9e0f10017",
+    "position": 17,
+    "filepath": "src/pages/slides/Slide17FutureScope.tsx",
+    "title": "Future Scope",
+    "description": "Four phases: auth, AI pricing, mobile app, analytics dashboard",
+    "speakerNotes": ""
+  },
+  {
+    "id": "a1b2c3d4-0018-4e5f-a6b7-c8d9e0f10018",
+    "position": 18,
+    "filepath": "src/pages/slides/Slide18Conclusion.tsx",
+    "title": "Conclusion",
+    "description": "Closing slide with summary tags and student footer",
+    "speakerNotes": ""
+  }
+]

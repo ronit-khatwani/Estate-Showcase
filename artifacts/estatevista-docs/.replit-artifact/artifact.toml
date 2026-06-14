@@ -1,0 +1,31 @@
+kind = "slides"
+previewPath = "/estatevista-docs/"
+title = "EstateVista — College Documentation"
+version = "1.0.0"
+id = "artifacts/estatevista-docs"
+router = "path"
+
+[[integratedSkills]]
+name = "slides"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/estatevista-docs/" ]
+localPort = 19626
+
+[services.development]
+run = "pnpm --filter @workspace/estatevista-docs run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/estatevista-docs", "run", "build" ]
+publicDir = "artifacts/estatevista-docs/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19626"
+BASE_PATH = "/estatevista-docs/"
