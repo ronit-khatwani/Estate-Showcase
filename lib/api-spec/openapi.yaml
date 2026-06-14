@@ -1,22 +1,29 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: EstateVista Real Estate Platform API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: properties
+    description: Property listings
+  - name: agents
+    description: Real estate agents
+  - name: search
+    description: Search and filter
+  - name: stats
+    description: Market statistics
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +31,297 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /properties:
+    get:
+      operationId: listProperties
+      tags: [properties]
+      summary: List all properties with optional filters
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [residential, commercial, plot, industrial, all]
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: minPrice
+          in: query
+          schema:
+            type: integer
+        - name: maxPrice
+          in: query
+          schema:
+            type: integer
+        - name: minArea
+          in: query
+          schema:
+            type: integer
+        - name: maxArea
+          in: query
+          schema:
+            type: integer
+        - name: bedrooms
+          in: query
+          schema:
+            type: integer
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [for_sale, for_rent, sold, all]
+        - name: sortBy
+          in: query
+          schema:
+            type: string
+            enum: [price_asc, price_desc, newest, area]
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of properties
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PropertyList"
+
+    post:
+      operationId: createProperty
+      tags: [properties]
+      summary: Create a new property listing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PropertyInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Property"
+
+  /properties/featured:
+    get:
+      operationId: getFeaturedProperties
+      tags: [properties]
+      summary: Get featured/premium property listings
+      responses:
+        "200":
+          description: Featured properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Property"
+
+  /properties/recent:
+    get:
+      operationId: getRecentProperties
+      tags: [properties]
+      summary: Get recently added properties
+      responses:
+        "200":
+          description: Recent properties
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Property"
+
+  /properties/map:
+    get:
+      operationId: getPropertiesForMap
+      tags: [properties]
+      summary: Get properties with coordinates for map view
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Map-ready property pins
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PropertyPin"
+
+  /properties/{id}:
+    get:
+      operationId: getProperty
+      tags: [properties]
+      summary: Get a single property by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Property details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Property"
+        "404":
+          description: Not found
+
+    patch:
+      operationId: updateProperty
+      tags: [properties]
+      summary: Update a property
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PropertyUpdate"
+      responses:
+        "200":
+          description: Updated property
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Property"
+
+    delete:
+      operationId: deleteProperty
+      tags: [properties]
+      summary: Delete a property
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /agents:
+    get:
+      operationId: listAgents
+      tags: [agents]
+      summary: List all agents
+      responses:
+        "200":
+          description: Agent list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Agent"
+
+  /agents/{id}:
+    get:
+      operationId: getAgent
+      tags: [agents]
+      summary: Get agent by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Agent details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Agent"
+
+  /stats/market:
+    get:
+      operationId: getMarketStats
+      tags: [stats]
+      summary: Get overall market statistics
+      responses:
+        "200":
+          description: Market statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketStats"
+
+  /stats/cities:
+    get:
+      operationId: getCityStats
+      tags: [stats]
+      summary: Get property statistics by city
+      responses:
+        "200":
+          description: City-wise stats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CityStats"
+
+  /stats/price-trends:
+    get:
+      operationId: getPriceTrends
+      tags: [stats]
+      summary: Get monthly price trend data
+      responses:
+        "200":
+          description: Price trend data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PriceTrend"
+
+  /search/suggestions:
+    get:
+      operationId: getSearchSuggestions
+      tags: [search]
+      summary: Get location/property search suggestions
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Search suggestions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SearchSuggestion"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +332,354 @@ components:
       required:
         - status
 
+    Property:
+      type: object
+      required:
+        - id
+        - title
+        - type
+        - status
+        - price
+        - address
+        - city
+        - state
+        - lat
+        - lng
+        - area
+        - images
+        - agentId
+        - createdAt
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: ["string", "null"]
+        type:
+          type: string
+          enum: [residential, commercial, plot, industrial]
+        subtype:
+          type: ["string", "null"]
+          description: "apartment, villa, office, shop, land, warehouse, etc."
+        status:
+          type: string
+          enum: [for_sale, for_rent, sold]
+        price:
+          type: integer
+          description: Price in USD
+        pricePerSqft:
+          type: ["integer", "null"]
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: ["string", "null"]
+        lat:
+          type: number
+        lng:
+          type: number
+        area:
+          type: integer
+          description: Area in sq ft
+        bedrooms:
+          type: ["integer", "null"]
+        bathrooms:
+          type: ["integer", "null"]
+        yearBuilt:
+          type: ["integer", "null"]
+        parking:
+          type: ["integer", "null"]
+        floors:
+          type: ["integer", "null"]
+        featured:
+          type: boolean
+        images:
+          type: array
+          items:
+            type: string
+        amenities:
+          type: array
+          items:
+            type: string
+        agentId:
+          type: integer
+        views:
+          type: integer
+        createdAt:
+          type: string
+
+    PropertyInput:
+      type: object
+      required:
+        - title
+        - type
+        - status
+        - price
+        - address
+        - city
+        - state
+        - lat
+        - lng
+        - area
+        - agentId
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        subtype:
+          type: string
+        status:
+          type: string
+        price:
+          type: integer
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+        lat:
+          type: number
+        lng:
+          type: number
+        area:
+          type: integer
+        bedrooms:
+          type: integer
+        bathrooms:
+          type: integer
+        yearBuilt:
+          type: integer
+        parking:
+          type: integer
+        floors:
+          type: integer
+        featured:
+          type: boolean
+        images:
+          type: array
+          items:
+            type: string
+        amenities:
+          type: array
+          items:
+            type: string
+        agentId:
+          type: integer
+
+    PropertyUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+        status:
+          type: string
+        featured:
+          type: boolean
+        images:
+          type: array
+          items:
+            type: string
+
+    PropertyList:
+      type: object
+      required:
+        - data
+        - total
+        - page
+        - limit
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Property"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+        totalPages:
+          type: integer
+
+    PropertyPin:
+      type: object
+      required:
+        - id
+        - lat
+        - lng
+        - price
+        - type
+        - title
+      properties:
+        id:
+          type: integer
+        lat:
+          type: number
+        lng:
+          type: number
+        price:
+          type: integer
+        type:
+          type: string
+        title:
+          type: string
+        status:
+          type: string
+        image:
+          type: ["string", "null"]
+
+    Agent:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - phone
+        - photo
+        - title
+        - rating
+        - totalSales
+        - activeListings
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        photo:
+          type: string
+        title:
+          type: string
+        bio:
+          type: ["string", "null"]
+        rating:
+          type: number
+        totalSales:
+          type: integer
+        activeListings:
+          type: integer
+        specializations:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        yearsExperience:
+          type: integer
+
+    MarketStats:
+      type: object
+      required:
+        - totalListings
+        - forSale
+        - forRent
+        - sold
+        - avgPrice
+        - avgPricePerSqft
+        - residentialCount
+        - commercialCount
+        - plotCount
+        - industrialCount
+        - totalAgents
+        - newListingsThisMonth
+      properties:
+        totalListings:
+          type: integer
+        forSale:
+          type: integer
+        forRent:
+          type: integer
+        sold:
+          type: integer
+        avgPrice:
+          type: integer
+        avgPricePerSqft:
+          type: integer
+        residentialCount:
+          type: integer
+        commercialCount:
+          type: integer
+        plotCount:
+          type: integer
+        industrialCount:
+          type: integer
+        totalAgents:
+          type: integer
+        newListingsThisMonth:
+          type: integer
+
+    CityStats:
+      type: object
+      required:
+        - city
+        - state
+        - count
+        - avgPrice
+        - minPrice
+        - maxPrice
+      properties:
+        city:
+          type: string
+        state:
+          type: string
+        count:
+          type: integer
+        avgPrice:
+          type: integer
+        minPrice:
+          type: integer
+        maxPrice:
+          type: integer
+
+    PriceTrend:
+      type: object
+      required:
+        - month
+        - avgResidential
+        - avgCommercial
+        - avgPlot
+      properties:
+        month:
+          type: string
+        avgResidential:
+          type: integer
+        avgCommercial:
+          type: integer
+        avgPlot:
+          type: integer
+
+    SearchSuggestion:
+      type: object
+      required:
+        - id
+        - label
+        - type
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        type:
+          type: string
+          enum: [city, neighborhood, property, zip]
+        count:
+          type: ["integer", "null"]
