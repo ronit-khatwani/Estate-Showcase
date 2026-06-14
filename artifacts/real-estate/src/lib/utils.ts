@@ -6,13 +6,19 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPrice(price: number, status?: string): string {
+  const fmt = (n: number) =>
+    n >= 1_00_00_000
+      ? `₹${(n / 1_00_00_000).toFixed(2)} Cr`
+      : n >= 1_00_00_000 / 10
+      ? `₹${(n / 1_00_000).toFixed(0)} L`
+      : n >= 1_00_000
+      ? `₹${(n / 1_00_000).toFixed(2)} L`
+      : `₹${n.toLocaleString("en-IN")}`;
+
   if (status === "for_rent") {
-    if (price >= 10000) return `$${(price / 1000).toFixed(0)}k/mo`;
-    return `$${price.toLocaleString()}/mo`;
+    return `${fmt(price)}/mo`;
   }
-  if (price >= 1_000_000) return `$${(price / 1_000_000).toFixed(2)}M`;
-  if (price >= 1_000) return `$${(price / 1_000).toFixed(0)}k`;
-  return `$${price.toLocaleString()}`;
+  return fmt(price);
 }
 
 export function formatArea(area: number): string {
