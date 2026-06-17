@@ -1254,7 +1254,7 @@ async function seed() {
   // Strip agentIndex from each property
   const cleanProps = propsWithAgents.map(({ agentIndex: _a, ...rest }) => rest);
 
-  await db.insert(propertiesTable).values(cleanProps as Parameters<typeof db.insert>[0]);
+  await db.insert(propertiesTable).values(cleanProps as any);
   console.log(`Inserted ${properties.length} Ahmedabad properties`);
   console.log("Seed complete! 🇮🇳");
   process.exit(0);

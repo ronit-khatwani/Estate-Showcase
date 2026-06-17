@@ -30,10 +30,10 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-8">
             {[
-              { Icon: MapPin, title: "Head Office", desc: "350 Fifth Avenue, Suite 4800\nNew York, NY 10118" },
-              { Icon: Phone, title: "Phone", desc: "+1 (800) 555-0190\n+1 (212) 555-0180" },
+              { Icon: MapPin, title: "Head Office", desc: "12, Judges Bungalow Road, Suite 4800\nBodakdev, Ahmedabad, Gujarat 380054" },
+              { Icon: Phone, title: "Phone", desc: "+91 98250 11001\n+91 79 4001 1001" },
               { Icon: Mail, title: "Email", desc: "hello@estatevista.com\nagents@estatevista.com" },
-              { Icon: Clock, title: "Hours", desc: "Mon – Fri: 8am – 8pm EST\nSat – Sun: 9am – 6pm EST" },
+              { Icon: Clock, title: "Hours", desc: "Mon – Fri: 8am – 8pm IST\nSat – Sun: 9am – 6pm IST" },
             ].map(({ Icon, title, desc }, i) => (
               <motion.div
                 key={title}
@@ -118,7 +118,7 @@ export default function Contact() {
                       value={form.phone}
                       onChange={(e) => setForm({ ...form, phone: e.target.value })}
                       className="w-full bg-[hsl(220,10%,12%)] border border-[hsl(220,10%,20%)] px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+91 98765 43210"
                       data-testid="input-phone"
                     />
                   </div>

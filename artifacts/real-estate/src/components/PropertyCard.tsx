@@ -124,7 +124,7 @@ export default function PropertyCard({ property, index = 0 }: PropertyCardProps)
             </span>
             {property.pricePerSqft && (
               <span className="text-xs text-muted-foreground ml-2">
-                ${property.pricePerSqft.toLocaleString()}/sqft
+                ₹{property.pricePerSqft.toLocaleString()}/sqft
               </span>
             )}
           </div>

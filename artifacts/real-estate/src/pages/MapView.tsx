@@ -18,7 +18,7 @@ L.Icon.Default.mergeOptions({
 
 function createPriceIcon(price: number, type: string, status: string) {
   const color = typeColor(type);
-  const label = price >= 1_000_000 ? `$${(price / 1_000_000).toFixed(1)}M` : `$${(price / 1000).toFixed(0)}k`;
+  const label = formatPrice(price).replace(/\s+/g, "");
   const opacity = status === "sold" ? "0.5" : "1";
   return L.divIcon({
     className: "",
@@ -95,8 +95,8 @@ export default function MapView() {
           </div>
         ) : (
           <MapContainer
-            center={[39.5, -98.35]}
-            zoom={5}
+            center={[23.03, 72.58]}
+            zoom={12}
             className="w-full h-full"
             style={{ background: "#0d0d0d" }}
             data-testid="leaflet-map"

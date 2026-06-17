@@ -5,7 +5,7 @@ import { SlidersHorizontal, X, ChevronDown, LayoutGrid, List } from "lucide-reac
 import { useListProperties, useGetMarketStats } from "@workspace/api-client-react";
 import PropertyCard from "@/components/PropertyCard";
 import PropertySkeleton from "@/components/PropertySkeleton";
-import { typeLabel, statusLabel } from "@/lib/utils";
+import { typeLabel, statusLabel, formatPrice } from "@/lib/utils";
 
 const PROPERTY_TYPES = ["all", "residential", "commercial", "plot", "industrial"];
 const STATUS_TYPES = ["all", "for_sale", "for_rent", "sold"];
@@ -66,7 +66,7 @@ export default function Properties({ forcedType }: { forcedType?: string }) {
             </h1>
             {stats && (
               <p className="text-sm text-muted-foreground">
-                {data?.total ?? "..."} properties found · Avg. price ${((data?.data?.[0] ? stats.avgPrice : stats.avgPrice) / 1000).toFixed(0)}k
+                {data?.total ?? "..."} properties found · Avg. price {formatPrice(stats.avgPrice)}
               </p>
             )}
           </motion.div>
@@ -161,7 +161,7 @@ export default function Properties({ forcedType }: { forcedType?: string }) {
                     type="text"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    placeholder="e.g. New York"
+                    placeholder="e.g. Ahmedabad"
                     className="w-full bg-[hsl(220,10%,14%)] border border-[hsl(220,10%,20%)] px-3 py-2 text-sm focus:outline-none focus:border-primary"
                     data-testid="input-city-filter"
                   />
@@ -172,7 +172,7 @@ export default function Properties({ forcedType }: { forcedType?: string }) {
                     type="number"
                     value={minPrice ?? ""}
                     onChange={(e) => setMinPrice(e.target.value ? Number(e.target.value) : undefined)}
-                    placeholder="Min $"
+                    placeholder="Min ₹"
                     className="w-full bg-[hsl(220,10%,14%)] border border-[hsl(220,10%,20%)] px-3 py-2 text-sm focus:outline-none focus:border-primary"
                     data-testid="input-min-price"
                   />
@@ -183,7 +183,7 @@ export default function Properties({ forcedType }: { forcedType?: string }) {
                     type="number"
                     value={maxPrice ?? ""}
                     onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : undefined)}
-                    placeholder="Max $"
+                    placeholder="Max ₹"
                     className="w-full bg-[hsl(220,10%,14%)] border border-[hsl(220,10%,20%)] px-3 py-2 text-sm focus:outline-none focus:border-primary"
                     data-testid="input-max-price"
                   />

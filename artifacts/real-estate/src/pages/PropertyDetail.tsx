@@ -191,7 +191,7 @@ export default function PropertyDetail() {
               {property.pricePerSqft && (
                 <div>
                   <span className="text-xs text-muted-foreground uppercase tracking-wider block mb-1">Per Sq Ft</span>
-                  <span className="text-xl font-semibold text-foreground">${property.pricePerSqft.toLocaleString()}</span>
+                  <span className="text-xl font-semibold text-foreground">₹{property.pricePerSqft.toLocaleString()}</span>
                 </div>
               )}
             </div>

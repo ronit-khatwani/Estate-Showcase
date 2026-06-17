@@ -9,6 +9,7 @@ import {
   useGetRecentProperties,
   useGetSearchSuggestions,
 } from "@workspace/api-client-react";
+import { formatPrice } from "@/lib/utils";
 import PropertyCard from "@/components/PropertyCard";
 import PropertySkeleton from "@/components/PropertySkeleton";
 import StatCounter from "@/components/StatCounter";
@@ -187,7 +188,7 @@ export default function Home() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
               <StatCounter value={stats.totalListings} suffix="+" label="Total Listings" />
               <StatCounter value={stats.totalAgents} suffix="+" label="Expert Agents" />
-              <StatCounter value={stats.avgPrice} prefix="$" suffix="" label="Avg. Property Price" />
+              <StatCounter value={stats.avgPrice} prefix="₹" suffix="" label="Avg. Property Price" />
               <StatCounter value={stats.sold} suffix="+" label="Properties Sold" />
             </div>
           </div>
@@ -337,7 +338,7 @@ export default function Home() {
                       <div className="font-semibold text-foreground group-hover:text-primary transition-colors text-sm">{city.city}</div>
                       <div className="text-xs text-muted-foreground mt-0.5">{city.state}</div>
                       <div className="text-xs text-primary mt-2">{city.count} listings</div>
-                      <div className="text-xs text-muted-foreground">avg ${(city.avgPrice / 1000).toFixed(0)}k</div>
+                      <div className="text-xs text-muted-foreground">avg {formatPrice(city.avgPrice)}</div>
                     </div>
                   </Link>
                 </motion.div>
